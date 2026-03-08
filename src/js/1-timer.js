@@ -36,22 +36,25 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  dataTimeButton.setAttribute('disabled', '');
+});
+
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    userSelectedDate = selectedDates[0];
-    if (userSelectedDate.getTime() <= Date.now()) {
+    dataTimeButton.removeAttribute('disabled');
+    if (selectedDates[0].getTime() <= Date.now()) {
       dataTimeButton.setAttribute('disabled', '');
       iziToast.show({
         title: 'ERROR',
         message: 'Please choose a date in the future',
       });
     } else {
-      dataTimeButton.removeAttribute('disabled');
+      userSelectedDate = selectedDates[0];
     }
   },
 });
@@ -66,17 +69,20 @@ dataTimeButton.addEventListener('click', () => {
 
   intervalId = setInterval(() => {
     initTime = Date.now();
-
     const diff = userSelectedDate.getTime() - initTime;
-    objectTime = convertMs(diff);
-    dataDays.textContent = addLeadingZero(objectTime.days);
-    dataHours.textContent = addLeadingZero(objectTime.hours);
-    dataMinutes.textContent = addLeadingZero(objectTime.minutes);
-    dataSeconds.textContent = addLeadingZero(objectTime.seconds);
-
-    if (diff < 1) {
+    if (diff <= 0) {
+      dataDays.textContent = '00';
+      dataHours.textContent = '00';
+      dataMinutes.textContent = '00';
+      dataSeconds.textContent = '00';
       clearInterval(intervalId);
       input.removeAttribute('disabled');
+    } else {
+      objectTime = convertMs(diff);
+      dataDays.textContent = addLeadingZero(objectTime.days);
+      dataHours.textContent = addLeadingZero(objectTime.hours);
+      dataMinutes.textContent = addLeadingZero(objectTime.minutes);
+      dataSeconds.textContent = addLeadingZero(objectTime.seconds);
     }
   }, 1000);
 });
