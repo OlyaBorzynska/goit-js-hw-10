@@ -1,17 +1,2 @@
-import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */import{f as b,i as h}from"./assets/vendor-BbbuE1sJ.js";const s=document.querySelector(".datatime-button"),y=document.querySelector(".timer"),d=document.querySelector(".datatime-input");let n;function T(e){const m=Math.floor(e/864e5),p=Math.floor(e%864e5/36e5),v=Math.floor(e%864e5%36e5/6e4),f=Math.floor(e%864e5%36e5%6e4/1e3);return{days:m,hours:p,minutes:v,seconds:f}}b("#datetime-picker",{enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){console.log(e[0]),n=e[0],n.getTime()<Date.now()?(s.setAttribute("disabled",""),h.show({title:"ERROR",message:"Please choose a date in the future"})):s.removeAttribute("disabled")}});let c,r,u;s.addEventListener("click",()=>{console.log("start"),c=setInterval(()=>{console.log("tick"),r=Date.now();const e=n.getTime()-r;u=T(e),y.innerHTML=g(u),d.setAttribute("disabled",""),s.setAttribute("disabled",""),e<1&&(clearInterval(c),d.removeAttribute("disabled"))},1e3)});function t(e){return String(e).padStart(2,"0")}function g(e){const a=t(e.days),o=t(e.hours),i=t(e.minutes),l=t(e.seconds);return`<div class="field">
-              <span class="value" data-days>${a}</span>
-              <span class="label">Days</span>
-            </div>
-            <div class="field">
-              <span class="value" data-hours>${o}</span>
-              <span class="label">Hours</span>
-            </div>
-            <div class="field">
-              <span class="value" data-minutes>${i}</span>
-              <span class="label">Minutes</span>
-            </div>
-            <div class="field">
-              <span class="value" data-seconds>${l}</span>
-              <span class="label">Seconds</span>
-            </div>`}
+import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */import{f as h,i as f}from"./assets/vendor-BbbuE1sJ.js";const n=document.querySelector(".datatime-button"),r=document.querySelector(".datatime-input"),y=document.querySelector("[data-days]"),b=document.querySelector("[data-hours]"),S=document.querySelector("[data-minutes]"),v=document.querySelector("[data-seconds]");let a;function p(t){const u=Math.floor(t/864e5),c=Math.floor(t%864e5/36e5),l=Math.floor(t%864e5%36e5/6e4),m=Math.floor(t%864e5%36e5%6e4/1e3);return{days:u,hours:c,minutes:l,seconds:m}}h("#datetime-picker",{enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(t){console.log(t[0]),a=t[0],a.getTime()<=Date.now()?(n.setAttribute("disabled",""),f.show({title:"ERROR",message:"Please choose a date in the future"})):n.removeAttribute("disabled")}});let s,i,e;n.addEventListener("click",()=>{r.setAttribute("disabled",""),n.setAttribute("disabled",""),s=setInterval(()=>{console.log("tick"),i=Date.now();const t=a.getTime()-i;e=p(t),y.textContent=o(e.days),b.textContent=o(e.hours),S.textContent=o(e.minutes),v.textContent=o(e.seconds),t<1&&(clearInterval(s),r.removeAttribute("disabled"))},1e3)});function o(t){return String(t).padStart(2,"0")}
 //# sourceMappingURL=1-timer.js.map
