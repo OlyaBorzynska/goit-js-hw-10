@@ -5,14 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snackbar</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script type="module" crossorigin src="/goit-js-hw-10/2-snackbar.js"></script>
     <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/styles-DvPDDfy5.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-BbbuE1sJ.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/vendor-CZjNVMTf.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/styles-hlW7UVLk.css">
   </head>
   <body>
     <main>
       <div class="container">
-        <h1 class="main-title">Snackbar</h1>
+        <h1 class="main-title-form">Snackbar</h1>
+        <form class="form">
+          <label class="label-form">
+            Delay (ms)
+            <input class="input-form" type="number" name="delay" required />
+          </label>
+
+          <fieldset class="fieldset-form">
+            <legend class="legend-fieldset">State</legend>
+            <label class="label-fieldset">
+              <input
+                class="input-fieldset"
+                type="radio"
+                name="state"
+                value="fulfilled"
+                required
+              />
+              Fulfilled
+            </label>
+            <label class="label-fieldset">
+              <input
+                class="input-fieldset"
+                type="radio"
+                name="state"
+                value="rejected"
+                required
+              />
+              Rejected
+            </label>
+          </fieldset>
+
+          <button class="form-button" type="submit">Create notification</button>
+        </form>
+
         <a class="back-link" href="./index.html">Go back</a>
       </div>
     </main>
