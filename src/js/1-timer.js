@@ -9,8 +9,12 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const dataTimeButton = document.querySelector('.datatime-button');
-const timer = document.querySelector('.timer');
+// const timer = document.querySelector('.timer');
 const input = document.querySelector('.datatime-input');
+const dataDays = document.querySelector('[data-days]');
+const dataHours = document.querySelector('[data-hours]');
+const dataMinutes = document.querySelector('[data-minutes]');
+const dataSeconds = document.querySelector('[data-seconds]');
 
 let userSelectedDate;
 
@@ -41,7 +45,7 @@ flatpickr('#datetime-picker', {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     userSelectedDate = selectedDates[0];
-    if (userSelectedDate.getTime() < Date.now()) {
+    if (userSelectedDate.getTime() <= Date.now()) {
       dataTimeButton.setAttribute('disabled', '');
       iziToast.show({
         title: 'ERROR',
@@ -58,16 +62,21 @@ let initTime;
 let objectTime;
 
 dataTimeButton.addEventListener('click', () => {
-  console.log('start');
+  input.setAttribute('disabled', '');
+  dataTimeButton.setAttribute('disabled', '');
+
   intervalId = setInterval(() => {
     console.log('tick');
     initTime = Date.now();
 
     const diff = userSelectedDate.getTime() - initTime;
     objectTime = convertMs(diff);
-    timer.innerHTML = itemTemplate(objectTime);
-    input.setAttribute('disabled', '');
-    dataTimeButton.setAttribute('disabled', '');
+    dataDays.textContent = addLeadingZero(objectTime.days);
+    dataHours.textContent = addLeadingZero(objectTime.hours);
+    dataMinutes.textContent = addLeadingZero(objectTime.minutes);
+    dataSeconds.textContent = addLeadingZero(objectTime.seconds);
+
+    // timer.innerHTML = itemTemplate(objectTime);
 
     if (diff < 1) {
       clearInterval(intervalId);
@@ -81,26 +90,26 @@ function addLeadingZero(value) {
   return validValue.padStart(2, '0');
 }
 
-function itemTemplate(item) {
-  const validDays = addLeadingZero(item.days);
-  const validHours = addLeadingZero(item.hours);
-  const validMinutes = addLeadingZero(item.minutes);
-  const validSeconds = addLeadingZero(item.seconds);
+// function itemTemplate(item) {
+//   const validDays = addLeadingZero(item.days);
+//   const validHours = addLeadingZero(item.hours);
+//   const validMinutes = addLeadingZero(item.minutes);
+//   const validSeconds = addLeadingZero(item.seconds);
 
-  return `<div class="field">
-              <span class="value" data-days>${validDays}</span>
-              <span class="label">Days</span>
-            </div>
-            <div class="field">
-              <span class="value" data-hours>${validHours}</span>
-              <span class="label">Hours</span>
-            </div>
-            <div class="field">
-              <span class="value" data-minutes>${validMinutes}</span>
-              <span class="label">Minutes</span>
-            </div>
-            <div class="field">
-              <span class="value" data-seconds>${validSeconds}</span>
-              <span class="label">Seconds</span>
-            </div>`;
-}
+// return `<div class="field">
+//             <span class="value" data-days>${validDays}</span>
+//             <span class="label">Days</span>
+//           </div>
+//           <div class="field">
+//             <span class="value" data-hours>${validHours}</span>
+//             <span class="label">Hours</span>
+//           </div>
+//           <div class="field">
+//             <span class="value" data-minutes>${validMinutes}</span>
+//             <span class="label">Minutes</span>
+//           </div>
+//           <div class="field">
+//             <span class="value" data-seconds>${validSeconds}</span>
+//             <span class="label">Seconds</span>
+//           </div>`;
+// }

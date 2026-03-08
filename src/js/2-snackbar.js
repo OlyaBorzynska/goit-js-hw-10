@@ -9,9 +9,9 @@ function createPromise(value, delay) {
   const promise = new Promise((resolved, rejected) => {
     setTimeout(() => {
       if (value === 'fulfilled') {
-        resolved(`✅ Fulfilled promise in ${delay}ms`);
+        resolved(delay);
       } else {
-        rejected(`❌ Rejected promise in ${delay}ms`);
+        rejected(delay);
       }
     }, delay);
   });
@@ -29,14 +29,12 @@ form.addEventListener('submit', event => {
   newPromise
     .then(res => {
       iziToast.show({
-        message: res,
+        message: `✅ Fulfilled promise in ${res}ms`,
       });
     })
     .catch(error => {
       iziToast.show({
-        message: error,
+        message: `❌ Rejected promise in ${error}ms`,
       });
     });
-
-  // очищувати поля треба
 });
